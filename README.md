@@ -2,7 +2,7 @@
 
 A production-grade Node.js/Express.js REST API backend for an e-commerce platform with authentication, authorization, validation, and error handling. All data is stored in-memory using JavaScript objects.
 
-**🌐 Live API:** https://ecommerce-backend-peach-six.vercel.app/
+**🌐 Live API:** https://ecommerce-backend.vercel.app/
 
 ## 📋 Table of Contents
 
@@ -135,7 +135,7 @@ Create a `.env` file in the `backend/` directory with the following variables:
 
 ```env
 PORT=5000
-JWT_SECRET=your_super_secret_jwt_key_change_in_production
+JWT_SECRET=super_key
 JWT_EXPIRE=1h
 NODE_ENV=development
 ```

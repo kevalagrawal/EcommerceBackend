@@ -501,7 +501,7 @@
 
         <!-- Deployment Banner -->
         <div class="deployment-banner">
-            🌍 <strong>LIVE API:</strong> <a href="https://ecommerce-backend-peach-six.vercel.app/" target="_blank">https://ecommerce-backend-peach-six.vercel.app</a>
+            🌍 <strong>LIVE API:</strong> <a href="https://ecommerce-backend.vercel.app/" target="_blank">https://ecommerce-backend.vercel.app</a>
         </div>
 
         <!-- Navigation -->
@@ -542,7 +542,7 @@
 
             <!-- Alert -->
             <div class="alert alert-deployment">
-                <strong>✅ API is Live!</strong> All endpoints are deployed and accessible globally at <strong>https://ecommerce-backend-peach-six.vercel.app</strong>
+                <strong>✅ API is Live!</strong> All endpoints are deployed and accessible globally at <strong>https://ecommerce-backend.vercel.app</strong>
             </div>
 
             <!-- Features Section -->
@@ -609,8 +609,8 @@
                     <div class="base-url-card">
                         <h4>🌐 Production (Live)</h4>
                         <p>Global deployment with high availability</p>
-                        <div class="url">https://ecommerce-backend-peach-six.vercel.app</div>
-                        <button class="copy-btn" onclick="copyToClipboard('https://ecommerce-backend-peach-six.vercel.app')">Copy URL</button>
+                        <div class="url">https://ecommerce-backend.vercel.app</div>
+                        <button class="copy-btn" onclick="copyToClipboard('https://ecommerce-backend.vercel.app')">Copy URL</button>
                     </div>
                     <div class="base-url-card">
                         <h4>🖥️ Local Development</h4>
@@ -668,7 +668,7 @@
   }
 }</pre>
                 <p><strong>Example with Live API:</strong></p>
-                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/signup \
+                <pre>curl -X POST https://ecommerce-backend.vercel.app/users/signup \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
@@ -700,7 +700,7 @@
   }
 }</pre>
                 <p><strong>Example with Live API:</strong></p>
-                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/login \
+                <pre>curl -X POST https://ecommerce-backend.vercel.app/users/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "john@example.com",
@@ -753,7 +753,7 @@
   ]
 }</pre>
                 <p><strong>Try it:</strong></p>
-                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/products</pre>
+                <pre>curl -X GET https://ecommerce-backend.vercel.app/products</pre>
 
                 <h3>2. Get Single Product</h3>
                 <p>Retrieve details of a specific product.</p>
@@ -806,7 +806,7 @@
                 </div>
                 <p><span class="badge badge-required">REQUIRED</span> Authentication</p>
                 <p><strong>Try it:</strong></p>
-                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/cart \
+                <pre>curl -X GET https://ecommerce-backend.vercel.app/cart \
   -H "Authorization: Bearer &lt;your_token&gt;"</pre>
 
                 <h3>2. Add to Cart</h3>
@@ -822,7 +822,7 @@
   "quantity": 2
 }</pre>
                 <p><strong>Try it:</strong></p>
-                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/cart/add \
+                <pre>curl -X POST https://ecommerce-backend.vercel.app/cart/add \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer &lt;your_token&gt;" \
   -d '{
@@ -879,7 +879,7 @@
   }
 }</pre>
                 <p><strong>Try it:</strong></p>
-                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/orders \
+                <pre>curl -X POST https://ecommerce-backend.vercel.app/orders \
   -H "Authorization: Bearer &lt;your_token&gt;"</pre>
 
                 <h3>2. Get User Orders</h3>
@@ -890,7 +890,7 @@
                 </div>
                 <p><span class="badge badge-required">REQUIRED</span> Authentication</p>
                 <p><strong>Try it:</strong></p>
-                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/orders \
+                <pre>curl -X GET https://ecommerce-backend.vercel.app/orders \
   -H "Authorization: Bearer &lt;your_token&gt;"</pre>
             </section>
 
@@ -984,7 +984,7 @@
                 
                 <h3>Using Live API (No Setup Required)</h3>
                 <div class="alert alert-success">
-                    <strong>✅ The API is already live!</strong> Start using it immediately at: <strong>https://ecommerce-backend-peach-six.vercel.app</strong>
+                    <strong>✅ The API is already live!</strong> Start using it immediately at: <strong>https://ecommerce-backend.vercel.app</strong>
                 </div>
 
                 <h3>Local Development Setup</h3>
@@ -1021,7 +1021,7 @@ NODE_ENV=development</pre>
                 <p>Complete workflow from signup to order placement using the live API:</p>
 
                 <h3>Step 1: Sign Up</h3>
-                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/signup \
+                <pre>curl -X POST https://ecommerce-backend.vercel.app/users/signup \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
@@ -1030,7 +1030,7 @@ NODE_ENV=development</pre>
   }'</pre>
 
                 <h3>Step 2: Login (Get Token)</h3>
-                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/login \
+                <pre>curl -X POST https://ecommerce-backend.vercel.app/users/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "john@example.com",
@@ -1040,10 +1040,10 @@ NODE_ENV=development</pre>
 # Keep the token from response for next steps</pre>
 
                 <h3>Step 3: View Products</h3>
-                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/products</pre>
+                <pre>curl -X GET https://ecommerce-backend.vercel.app/products</pre>
 
                 <h3>Step 4: Add to Cart</h3>
-                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/cart/add \
+                <pre>curl -X POST https://ecommerce-backend.vercel.app/cart/add \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -d '{
@@ -1052,15 +1052,15 @@ NODE_ENV=development</pre>
   }'</pre>
 
                 <h3>Step 5: Get Cart</h3>
-                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/cart \
+                <pre>curl -X GET https://ecommerce-backend.vercel.app/cart \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"</pre>
 
                 <h3>Step 6: Place Order</h3>
-                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/orders \
+                <pre>curl -X POST https://ecommerce-backend.vercel.app/orders \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"</pre>
 
                 <h3>Step 7: Get Orders</h3>
-                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/orders \
+                <pre>curl -X GET https://ecommerce-backend.vercel.app/orders \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"</pre>
             </section>
 
@@ -1127,7 +1127,7 @@ NODE_ENV=development</pre>
                         The API is deployed on Vercel with global CDN support for fast and reliable access from anywhere in the world.
                     </p>
                     <p style="margin-top: 10px;">
-                        <strong>Live URL:</strong> <code>https://ecommerce-backend-peach-six.vercel.app</code>
+                        <strong>Live URL:</strong> <code>https://ecommerce-backend.vercel.app</code>
                     </p>
                     <p style="margin-top: 10px;">
                         All endpoints are live and ready to use!
@@ -1145,7 +1145,7 @@ NODE_ENV=development</pre>
                     <strong>ℹ️ Development vs Production:</strong> 
                     <ul style="padding-left: 20px; margin: 10px 0;">
                         <li><strong>Development:</strong> Run locally with npm start</li>
-                        <li><strong>Production:</strong> Use deployed live API at https://ecommerce-backend-peach-six.vercel.app</li>
+                        <li><strong>Production:</strong> Use deployed live API at https://ecommerce-backend.vercel.app</li>
                     </ul>
                 </div>
             </section>
@@ -1155,7 +1155,7 @@ NODE_ENV=development</pre>
         <!-- Footer -->
         <footer>
             <p>&copy; 2026 E-Commerce REST API Backend. Created with ❤️ for developers.</p>
-            <p style="font-size: 0.9em; margin-top: 10px;">🌐 Live at: https://ecommerce-backend-peach-six.vercel.app</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">🌐 Live at: https://ecommerce-backend.vercel.app</p>
             <p style="font-size: 0.9em; margin-top: 10px;">Production-grade backend starter template</p>
         </footer>
     </div>
