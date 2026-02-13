@@ -2,7 +2,7 @@
 
 A production-grade Node.js/Express.js REST API backend for an e-commerce platform with authentication, authorization, validation, and error handling. All data is stored in-memory using JavaScript objects.
 
-**🌐 Live API:** https://ecommerce-backend.vercel.app/
+**🌐 Live API:** https://ecommercebackendfsd.vercel.app/
 
 ## 📋 Table of Contents
 
@@ -122,7 +122,7 @@ backend-ecommerce/
 The API is also deployed on Vercel and can be accessed at:
 
 ```
-https://ecommerce-backend-peach-six.vercel.app/
+https://ecommercebackendfsd.vercel.app/
 ```
 
 All endpoints are available at this URL as well as localhost.
@@ -155,7 +155,7 @@ http://localhost:5000
 
 **Production (Vercel):**
 ```
-https://ecommerce-backend-peach-six.vercel.app
+https://ecommercebackendfsd.vercel.app
 ```
 
 ### Response Format
@@ -222,7 +222,7 @@ Create a new user account.
 
 **Example:**
 ```bash
-curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/signup \
+curl -X POST https://ecommercebackendfsd.vercel.app/users/signup \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
@@ -273,7 +273,7 @@ Authenticate user and receive JWT token.
 
 **Example:**
 ```bash
-curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/login \
+curl -X POST https://ecommercebackendfsd.vercel.app/users/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "john@example.com",
@@ -357,7 +357,7 @@ Retrieve all available products with pagination details.
 
 **Example:**
 ```bash
-curl -X GET https://ecommerce-backend-peach-six.vercel.app/products
+curl -X GET https://ecommercebackendfsd.vercel.app/products
 ```
 
 ---
@@ -587,7 +587,7 @@ Authorization: Bearer <token>
 
 **Example:**
 ```bash
-curl -X GET https://ecommerce-backend-peach-six.vercel.app/cart \
+curl -X GET https://ecommercebackendfsd.vercel.app/cart \
   -H "Authorization: Bearer <token>"
 ```
 
@@ -642,7 +642,7 @@ Authorization: Bearer <token>
 
 **Example:**
 ```bash
-curl -X POST https://ecommerce-backend-peach-six.vercel.app/cart/add \
+curl -X POST https://ecommercebackendfsd.vercel.app/cart/add \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <token>" \
   -d '{
@@ -762,7 +762,7 @@ Authorization: Bearer <token>
 
 **Example:**
 ```bash
-curl -X POST https://ecommerce-backend-peach-six.vercel.app/orders \
+curl -X POST https://ecommercebackendfsd.vercel.app/orders \
   -H "Authorization: Bearer <token>"
 ```
 
@@ -827,7 +827,7 @@ Authorization: Bearer <token>
 
 **Example:**
 ```bash
-curl -X GET https://ecommerce-backend-peach-six.vercel.app/orders \
+curl -X GET https://ecommercebackendfsd.vercel.app/orders \
   -H "Authorization: Bearer <token>"
 ```
 
@@ -982,12 +982,12 @@ The API uses a centralized error handling middleware that returns consistent err
 ### 1. Access the API Documentation
 Visit the live deployment:
 ```
-https://ecommerce-backend-peach-six.vercel.app/
+https://ecommercebackendfsd.vercel.app/
 ```
 
 ### 2. Sign Up a New User
 ```bash
-curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/signup \
+curl -X POST https://ecommercebackendfsd.vercel.app/users/signup \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
@@ -998,7 +998,7 @@ curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/signup \
 
 ### 3. Login and Get Token
 ```bash
-curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/login \
+curl -X POST https://ecommercebackendfsd.vercel.app/users/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "john@example.com",
@@ -1008,12 +1008,12 @@ curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/login \
 
 ### 4. View All Products
 ```bash
-curl -X GET https://ecommerce-backend-peach-six.vercel.app/products
+curl -X GET https://ecommercebackendfsd.vercel.app/products
 ```
 
 ### 5. Add Product to Cart
 ```bash
-curl -X POST https://ecommerce-backend-peach-six.vercel.app/cart/add \
+curl -X POST https://ecommercebackendfsd.vercel.app/cart/add \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <your_token_here>" \
   -d '{
@@ -1024,7 +1024,7 @@ curl -X POST https://ecommerce-backend-peach-six.vercel.app/cart/add \
 
 ### 6. Place an Order
 ```bash
-curl -X POST https://ecommerce-backend-peach-six.vercel.app/orders \
+curl -X POST https://ecommercebackendfsd.vercel.app/orders \
   -H "Authorization: Bearer <your_token_here>"
 ```
 
@@ -1065,7 +1065,7 @@ Centralized error handler for all API errors.
 The API is deployed on **Vercel** and is accessible globally at:
 
 ```
-https://ecommerce-backend-peach-six.vercel.app
+https://ecommercebackendfsd.vercel.app
 ```
 
 All endpoints work exactly the same way as on localhost. Just replace the base URL in your requests.
@@ -1125,7 +1125,7 @@ All endpoints work exactly the same way as on localhost. Just replace the base U
 ### Using Postman
 
 1. Import the API endpoints into Postman
-2. Set the base URL to `https://ecommerce-backend-peach-six.vercel.app`
+2. Set the base URL to `https://ecommercebackendfsd.vercel.app`
 3. Create a login request and save the token
 4. Use the token in the Authorization header for protected routes
 
