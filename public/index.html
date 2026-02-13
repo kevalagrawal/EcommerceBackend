@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce REST API Backend</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .version {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .deployment-banner {
+            background: #10b981;
+            color: white;
+            padding: 15px 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .deployment-banner a {
+            color: #fff;
+            text-decoration: underline;
+            margin-left: 10px;
+        }
+
+        .deployment-banner a:hover {
+            opacity: 0.8;
+        }
+
+        nav {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 2px solid #667eea;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h4 {
+            margin-top: 0;
+        }
+
+        .endpoint-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #764ba2;
+        }
+
+        .endpoint-card .method {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85em;
+            margin-right: 10px;
+        }
+
+        .method.get {
+            background: #dbeafe;
+            color: #0c4a6e;
+        }
+
+        .method.post {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .method.put {
+            background: #fef3c7;
+            color: #78350f;
+        }
+
+        .method.delete {
+            background: #fee2e2;
+            color: #7f1d1d;
+        }
+
+        .endpoint {
+            font-family: 'Courier New', monospace;
+            background: #1e293b;
+            color: #10b981;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63031;
+        }
+
+        pre {
+            background: #1e293b;
+            color: #10b981;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-code {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .status-2xx {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-4xx {
+            background: #fee2e2;
+            color: #7f1d1d;
+        }
+
+        .status-5xx {
+            background: #fecaca;
+            color: #7f1d1d;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .quick-link {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-link h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            color: #0c4a6e;
+            border-left: 4px solid #0284c7;
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            color: #78350f;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            color: #166534;
+            border-left: 4px solid #16a34a;
+        }
+
+        .alert-deployment {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+
+        .response-example {
+            margin: 15px 0;
+        }
+
+        .response-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .base-urls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .base-url-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .base-url-card h4 {
+            margin-top: 0;
+        }
+
+        .base-url-card .url {
+            background: #1e293b;
+            color: #10b981;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .copy-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 20px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            nav {
+                padding: 15px 20px;
+                gap: 10px;
+            }
+
+            .container {
+                margin: 10px;
+            }
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-required {
+            background: #fee2e2;
+            color: #7f1d1d;
+        }
+
+        .badge-optional {
+            background: #dbeafe;
+            color: #0c4a6e;
+        }
+
+        .badge-live {
+            background: #10b981;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🛒 E-Commerce REST API Backend</h1>
+            <p>A production-grade Node.js/Express.js REST API</p>
+            <div class="version">Version 1.0.0</div>
+        </header>
+
+        <!-- Deployment Banner -->
+        <div class="deployment-banner">
+            🌍 <strong>LIVE API:</strong> <a href="https://ecommerce-backend-peach-six.vercel.app/" target="_blank">https://ecommerce-backend-peach-six.vercel.app</a>
+        </div>
+
+        <!-- Navigation -->
+        <nav>
+            <a href="#features">✨ Features</a>
+            <a href="#tech-stack">🛠️ Tech Stack</a>
+            <a href="#base-urls">📍 API URLs</a>
+            <a href="#users">👤 Users</a>
+            <a href="#products">📦 Products</a>
+            <a href="#cart">🛒 Cart</a>
+            <a href="#orders">📑 Orders</a>
+            <a href="#error-handling">⚠️ Errors</a>
+            <a href="#authentication">🔐 Auth</a>
+            <a href="#setup">🚀 Setup</a>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Quick Links -->
+            <section class="quick-links">
+                <a href="#users" class="quick-link">
+                    <h3>👤 User Management</h3>
+                    <p>Sign up, login, and manage profiles</p>
+                </a>
+                <a href="#products" class="quick-link">
+                    <h3>📦 Products</h3>
+                    <p>Create, read, update, delete products</p>
+                </a>
+                <a href="#cart" class="quick-link">
+                    <h3>🛒 Shopping Cart</h3>
+                    <p>Manage cart items and quantities</p>
+                </a>
+                <a href="#orders" class="quick-link">
+                    <h3>📑 Orders</h3>
+                    <p>Place and track orders</p>
+                </a>
+            </section>
+
+            <!-- Alert -->
+            <div class="alert alert-deployment">
+                <strong>✅ API is Live!</strong> All endpoints are deployed and accessible globally at <strong>https://ecommerce-backend-peach-six.vercel.app</strong>
+            </div>
+
+            <!-- Features Section -->
+            <section id="features">
+                <h2>✨ Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🔐 JWT Authentication</h4>
+                        <p>Secure token-based authentication with 1-hour expiration</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔒 Password Hashing</h4>
+                        <p>bcryptjs for secure password storage</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>👑 Role-Based Access</h4>
+                        <p>Admin and user roles with different permissions</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💾 In-Memory Database</h4>
+                        <p>No external database required</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✅ Input Validation</h4>
+                        <p>express-validator for comprehensive validation</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⚠️ Error Handling</h4>
+                        <p>Centralized error middleware with consistent responses</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🏗️ Modular Architecture</h4>
+                        <p>Clean separation of concerns</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 Stock Management</h4>
+                        <p>Automatic stock reduction on order placement</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🌍 Cloud Deployed</h4>
+                        <p>Hosted on Vercel with global access</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tech Stack Section -->
+            <section id="tech-stack">
+                <h2>🛠️ Technology Stack</h2>
+                <div class="tech-stack">
+                    <div class="tech-item">Node.js Runtime</div>
+                    <div class="tech-item">Express.js Framework</div>
+                    <div class="tech-item">JWT Authentication</div>
+                    <div class="tech-item">bcryptjs Hashing</div>
+                    <div class="tech-item">express-validator</div>
+                    <div class="tech-item">dotenv Config</div>
+                    <div class="tech-item">Vercel Deployment</div>
+                </div>
+            </section>
+
+            <!-- Base URLs Section -->
+            <section id="base-urls">
+                <h2>📍 Base URLs</h2>
+                <div class="base-urls">
+                    <div class="base-url-card">
+                        <h4>🌐 Production (Live)</h4>
+                        <p>Global deployment with high availability</p>
+                        <div class="url">https://ecommerce-backend-peach-six.vercel.app</div>
+                        <button class="copy-btn" onclick="copyToClipboard('https://ecommerce-backend-peach-six.vercel.app')">Copy URL</button>
+                    </div>
+                    <div class="base-url-card">
+                        <h4>🖥️ Local Development</h4>
+                        <p>For local testing and development</p>
+                        <div class="url">http://localhost:5000</div>
+                        <button class="copy-btn" onclick="copyToClipboard('http://localhost:5000')">Copy URL</button>
+                    </div>
+                </div>
+                <div class="alert alert-success" style="margin-top: 20px;">
+                    <strong>✅ All endpoints work the same way!</strong> Use the production URL for external requests and localhost for local development.
+                </div>
+            </section>
+
+            <!-- Response Format Section -->
+            <section>
+                <h2>📝 Response Format</h2>
+                <h3>Success Response</h3>
+                <pre>{
+  "status": "success",
+  "message": "Operation successful",
+  "data": { /* response data */ }
+}</pre>
+                <h3>Error Response</h3>
+                <pre>{
+  "status": "error",
+  "message": "Error description"
+}</pre>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users">
+                <h2>👤 Users</h2>
+
+                <h3>1. Sign Up</h3>
+                <p>Create a new user account.</p>
+                <div class="endpoint-card">
+                    <span class="method post">POST</span>
+                    <code>/users/signup</code>
+                </div>
+                <p><strong>Request Body:</strong></p>
+                <pre>{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123"
+}</pre>
+                <p><strong>Response (201):</strong></p>
+                <pre>{
+  "status": "success",
+  "message": "User registered successfully",
+  "data": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "user"
+  }
+}</pre>
+                <p><strong>Example with Live API:</strong></p>
+                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/signup \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "password123"
+  }'</pre>
+
+                <h3>2. Login</h3>
+                <p>Authenticate user and receive JWT token.</p>
+                <div class="endpoint-card">
+                    <span class="method post">POST</span>
+                    <code>/users/login</code>
+                </div>
+                <p><strong>Request Body:</strong></p>
+                <pre>{
+  "email": "john@example.com",
+  "password": "password123"
+}</pre>
+                <p><strong>Response (200):</strong></p>
+                <pre>{
+  "status": "success",
+  "message": "Login successful",
+  "data": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "user",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}</pre>
+                <p><strong>Example with Live API:</strong></p>
+                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "john@example.com",
+    "password": "password123"
+  }'</pre>
+
+                <h3>3. Get Profile</h3>
+                <p>Retrieve authenticated user's profile information.</p>
+                <div class="endpoint-card">
+                    <span class="method get">GET</span>
+                    <code>/users/profile</code>
+                </div>
+                <p><span class="badge badge-required">REQUIRED</span> Authorization: Bearer &lt;token&gt;</p>
+                <p><strong>Response (200):</strong></p>
+                <pre>{
+  "status": "success",
+  "data": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "user",
+    "createdAt": "2026-02-13T10:30:00.000Z"
+  }
+}</pre>
+            </section>
+
+            <!-- Products Section -->
+            <section id="products">
+                <h2>📦 Products</h2>
+
+                <h3>1. Get All Products</h3>
+                <p>Retrieve all available products.</p>
+                <div class="endpoint-card">
+                    <span class="method get">GET</span>
+                    <code>/products</code>
+                </div>
+                <p><strong>Response (200):</strong></p>
+                <pre>{
+  "status": "success",
+  "count": 3,
+  "data": [
+    {
+      "id": 1,
+      "name": "Laptop",
+      "description": "High-performance laptop",
+      "price": 999.99,
+      "stock": 10,
+      "createdAt": "2026-02-13T10:30:00.000Z"
+    }
+  ]
+}</pre>
+                <p><strong>Try it:</strong></p>
+                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/products</pre>
+
+                <h3>2. Get Single Product</h3>
+                <p>Retrieve details of a specific product.</p>
+                <div class="endpoint-card">
+                    <span class="method get">GET</span>
+                    <code>/products/:id</code>
+                </div>
+
+                <h3>3. Create Product</h3>
+                <p>Add a new product (admin only).</p>
+                <div class="endpoint-card">
+                    <span class="method post">POST</span>
+                    <code>/products</code>
+                </div>
+                <p><span class="badge badge-required">REQUIRED</span> Admin Authorization</p>
+                <p><strong>Request Body:</strong></p>
+                <pre>{
+  "name": "USB-C Cable",
+  "description": "High-speed USB-C charging cable",
+  "price": 19.99,
+  "stock": 100
+}</pre>
+
+                <h3>4. Update Product</h3>
+                <p>Modify product details (admin only).</p>
+                <div class="endpoint-card">
+                    <span class="method put">PUT</span>
+                    <code>/products/:id</code>
+                </div>
+                <p><span class="badge badge-required">REQUIRED</span> Admin Authorization</p>
+
+                <h3>5. Delete Product</h3>
+                <p>Remove a product (admin only).</p>
+                <div class="endpoint-card">
+                    <span class="method delete">DELETE</span>
+                    <code>/products/:id</code>
+                </div>
+                <p><span class="badge badge-required">REQUIRED</span> Admin Authorization</p>
+            </section>
+
+            <!-- Cart Section -->
+            <section id="cart">
+                <h2>🛒 Cart</h2>
+
+                <h3>1. Get Cart</h3>
+                <p>Retrieve authenticated user's shopping cart.</p>
+                <div class="endpoint-card">
+                    <span class="method get">GET</span>
+                    <code>/cart</code>
+                </div>
+                <p><span class="badge badge-required">REQUIRED</span> Authentication</p>
+                <p><strong>Try it:</strong></p>
+                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/cart \
+  -H "Authorization: Bearer &lt;your_token&gt;"</pre>
+
+                <h3>2. Add to Cart</h3>
+                <p>Add a product to the user's shopping cart.</p>
+                <div class="endpoint-card">
+                    <span class="method post">POST</span>
+                    <code>/cart/add</code>
+                </div>
+                <p><span class="badge badge-required">REQUIRED</span> Authentication</p>
+                <p><strong>Request Body:</strong></p>
+                <pre>{
+  "productId": 1,
+  "quantity": 2
+}</pre>
+                <p><strong>Try it:</strong></p>
+                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/cart/add \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer &lt;your_token&gt;" \
+  -d '{
+    "productId": 1,
+    "quantity": 2
+  }'</pre>
+
+                <h3>3. Remove from Cart</h3>
+                <p>Remove a specific product from cart.</p>
+                <div class="endpoint-card">
+                    <span class="method delete">DELETE</span>
+                    <code>/cart/remove/:productId</code>
+                </div>
+                <p><span class="badge badge-required">REQUIRED</span> Authentication</p>
+
+                <h3>4. Clear Cart</h3>
+                <p>Remove all items from cart.</p>
+                <div class="endpoint-card">
+                    <span class="method delete">DELETE</span>
+                    <code>/cart</code>
+                </div>
+                <p><span class="badge badge-required">REQUIRED</span> Authentication</p>
+            </section>
+
+            <!-- Orders Section -->
+            <section id="orders">
+                <h2>📑 Orders</h2>
+
+                <h3>1. Place Order</h3>
+                <p>Create a new order from the user's cart. Reduces stock and clears cart.</p>
+                <div class="endpoint-card">
+                    <span class="method post">POST</span>
+                    <code>/orders</code>
+                </div>
+                <p><span class="badge badge-required">REQUIRED</span> Authentication</p>
+                <p><strong>Response (201):</strong></p>
+                <pre>{
+  "status": "success",
+  "message": "Order placed successfully",
+  "data": {
+    "orderId": 1,
+    "totalAmount": 1999.98,
+    "status": "pending",
+    "items": [
+      {
+        "productId": 1,
+        "productName": "Laptop",
+        "quantity": 2,
+        "price": 999.99,
+        "subtotal": 1999.98
+      }
+    ],
+    "createdAt": "2026-02-13T11:30:00.000Z"
+  }
+}</pre>
+                <p><strong>Try it:</strong></p>
+                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/orders \
+  -H "Authorization: Bearer &lt;your_token&gt;"</pre>
+
+                <h3>2. Get User Orders</h3>
+                <p>Retrieve all orders placed by the authenticated user.</p>
+                <div class="endpoint-card">
+                    <span class="method get">GET</span>
+                    <code>/orders</code>
+                </div>
+                <p><span class="badge badge-required">REQUIRED</span> Authentication</p>
+                <p><strong>Try it:</strong></p>
+                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/orders \
+  -H "Authorization: Bearer &lt;your_token&gt;"</pre>
+            </section>
+
+            <!-- HTTP Status Codes -->
+            <section id="error-handling">
+                <h2>⚠️ Error Handling</h2>
+                <p>The API uses meaningful HTTP status codes:</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Status Code</th>
+                                <th>Meaning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="status-code status-2xx">200</span></td>
+                                <td>OK - Request successful</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-code status-2xx">201</span></td>
+                                <td>Created - Resource created successfully</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-code status-4xx">400</span></td>
+                                <td>Bad Request - Invalid input/validation failed</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-code status-4xx">401</span></td>
+                                <td>Unauthorized - Authentication required or failed</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-code status-4xx">403</span></td>
+                                <td>Forbidden - Insufficient permissions</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-code status-4xx">404</span></td>
+                                <td>Not Found - Resource not found</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-code status-5xx">500</span></td>
+                                <td>Internal Server Error</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Authentication Section -->
+            <section id="authentication">
+                <h2>🔐 Authentication & Authorization</h2>
+                
+                <h3>JWT Authentication</h3>
+                <div class="alert alert-info">
+                    <strong>Token Format:</strong> <code>Authorization: Bearer &lt;token&gt;</code>
+                </div>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li>Tokens are generated on successful login</li>
+                    <li>Token expiration: 1 hour</li>
+                    <li>Verified by auth middleware on protected routes</li>
+                </ul>
+
+                <h3>Protected Routes</h3>
+                <div style="margin: 15px 0;">
+                    <strong>Authentication Required:</strong>
+                    <ul style="padding-left: 40px; margin: 10px 0;">
+                        <li><code>GET /users/profile</code></li>
+                        <li><code>GET /cart</code></li>
+                        <li><code>POST /cart/add</code></li>
+                        <li><code>DELETE /cart/remove/:productId</code></li>
+                        <li><code>DELETE /cart</code></li>
+                        <li><code>POST /orders</code></li>
+                        <li><code>GET /orders</code></li>
+                    </ul>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <strong>Admin Authentication Required:</strong>
+                    <ul style="padding-left: 40px; margin: 10px 0;">
+                        <li><code>POST /products</code></li>
+                        <li><code>PUT /products/:id</code></li>
+                        <li><code>DELETE /products/:id</code></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Setup Section -->
+            <section id="setup">
+                <h2>🚀 Setup & Installation</h2>
+                
+                <h3>Using Live API (No Setup Required)</h3>
+                <div class="alert alert-success">
+                    <strong>✅ The API is already live!</strong> Start using it immediately at: <strong>https://ecommerce-backend-peach-six.vercel.app</strong>
+                </div>
+
+                <h3>Local Development Setup</h3>
+                <p><strong>Prerequisites:</strong></p>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li>Node.js (v14 or higher)</li>
+                    <li>npm or yarn</li>
+                </ul>
+
+                <p><strong>Installation Steps:</strong></p>
+                <pre>cd backend
+npm install
+npm start</pre>
+
+                <div class="alert alert-success">
+                    <strong>✅ Local server will run on:</strong> http://localhost:5000
+                </div>
+
+                <h3>Environment Variables</h3>
+                <p>Create a <code>.env</code> file with:</p>
+                <pre>PORT=5000
+JWT_SECRET=your_super_secret_jwt_key_change_in_production
+JWT_EXPIRE=1h
+NODE_ENV=development</pre>
+
+                <div class="alert alert-warning">
+                    <strong>⚠️ Note:</strong> Change JWT_SECRET for production use
+                </div>
+            </section>
+
+            <!-- Quick Start Example -->
+            <section>
+                <h2>⚡ Quick Start Example</h2>
+                <p>Complete workflow from signup to order placement using the live API:</p>
+
+                <h3>Step 1: Sign Up</h3>
+                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/signup \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "password123"
+  }'</pre>
+
+                <h3>Step 2: Login (Get Token)</h3>
+                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "john@example.com",
+    "password": "password123"
+  }'
+
+# Keep the token from response for next steps</pre>
+
+                <h3>Step 3: View Products</h3>
+                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/products</pre>
+
+                <h3>Step 4: Add to Cart</h3>
+                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/cart/add \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE" \
+  -d '{
+    "productId": 1,
+    "quantity": 2
+  }'</pre>
+
+                <h3>Step 5: Get Cart</h3>
+                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/cart \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"</pre>
+
+                <h3>Step 6: Place Order</h3>
+                <pre>curl -X POST https://ecommerce-backend-peach-six.vercel.app/orders \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"</pre>
+
+                <h3>Step 7: Get Orders</h3>
+                <pre>curl -X GET https://ecommerce-backend-peach-six.vercel.app/orders \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"</pre>
+            </section>
+
+            <!-- Data Models -->
+            <section>
+                <h2>💾 Data Models</h2>
+
+                <h3>User Model</h3>
+                <pre>{
+  id: number,
+  name: string,
+  email: string,
+  passwordHash: string,
+  role: "user" | "admin",
+  createdAt: Date
+}</pre>
+
+                <h3>Product Model</h3>
+                <pre>{
+  id: number,
+  name: string,
+  description: string,
+  price: number,
+  stock: number,
+  createdAt: Date
+}</pre>
+
+                <h3>Cart Model</h3>
+                <pre>{
+  userId: number,
+  items: [
+    {
+      productId: number,
+      quantity: number
+    }
+  ]
+}</pre>
+
+                <h3>Order Model</h3>
+                <pre>{
+  id: number,
+  userId: number,
+  items: [
+    {
+      productId: number,
+      productName: string,
+      quantity: number,
+      price: number,
+      subtotal: number
+    }
+  ],
+  totalAmount: number,
+  status: "pending" | "shipped" | "delivered",
+  createdAt: Date
+}</pre>
+            </section>
+
+            <!-- Deployment Info -->
+            <section>
+                <h2>🌍 Deployment Information</h2>
+                <div class="alert alert-deployment">
+                    <strong>🚀 Hosted on Vercel</strong>
+                    <p style="margin-top: 10px;">
+                        The API is deployed on Vercel with global CDN support for fast and reliable access from anywhere in the world.
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <strong>Live URL:</strong> <code>https://ecommerce-backend-peach-six.vercel.app</code>
+                    </p>
+                    <p style="margin-top: 10px;">
+                        All endpoints are live and ready to use!
+                    </p>
+                </div>
+            </section>
+
+            <!-- Important Notes -->
+            <section>
+                <h2>📌 Important Notes</h2>
+                <div class="alert alert-warning">
+                    <strong>⚠️ In-Memory Storage:</strong> All data is stored in-memory and will be lost on server restart. For persistence in production, implement a database.
+                </div>
+                <div class="alert alert-info">
+                    <strong>ℹ️ Development vs Production:</strong> 
+                    <ul style="padding-left: 20px; margin: 10px 0;">
+                        <li><strong>Development:</strong> Run locally with npm start</li>
+                        <li><strong>Production:</strong> Use deployed live API at https://ecommerce-backend-peach-six.vercel.app</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 E-Commerce REST API Backend. Created with ❤️ for developers.</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">🌐 Live at: https://ecommerce-backend-peach-six.vercel.app</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Production-grade backend starter template</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('URL copied to clipboard!');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

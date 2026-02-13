@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const userRoutes = require('./routes/user.routes');
 const productRoutes = require('./routes/product.routes');
 const cartRoutes = require('./routes/cart.routes');
@@ -10,6 +11,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/users', userRoutes);
@@ -17,18 +19,9 @@ app.use('/products', productRoutes);
 app.use('/cart', cartRoutes);
 app.use('/orders', orderRoutes);
 
-// Welcome route
+// Welcome route - Serve HTML
 app.get('/', (req, res) => {
-  res.json({
-    message: 'Welcome to E-Commerce API',
-    version: '1.0.0',
-    endpoints: {
-      users: '/users',
-      products: '/products',
-      cart: '/cart',
-      orders: '/orders'
-    }
-  });
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // 404 handler

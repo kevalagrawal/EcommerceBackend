@@ -2,6 +2,8 @@
 
 A production-grade Node.js/Express.js REST API backend for an e-commerce platform with authentication, authorization, validation, and error handling. All data is stored in-memory using JavaScript objects.
 
+**🌐 Live API:** https://ecommerce-backend-peach-six.vercel.app/
+
 ## 📋 Table of Contents
 
 - [Features](#features)
@@ -46,6 +48,7 @@ A production-grade Node.js/Express.js REST API backend for an e-commerce platfor
 - **Validation:** express-validator
 - **Environment:** dotenv
 - **Language:** JavaScript (ES6+)
+- **Deployment:** Vercel
 
 ---
 
@@ -92,7 +95,7 @@ backend-ecommerce/
 - Node.js (v14 or higher)
 - npm or yarn
 
-### Steps
+### Local Setup
 
 1. **Navigate to the backend directory:**
    ```bash
@@ -114,6 +117,16 @@ backend-ecommerce/
    http://localhost:5000
    ```
 
+### Deployed URL
+
+The API is also deployed on Vercel and can be accessed at:
+
+```
+https://ecommerce-backend-peach-six.vercel.app/
+```
+
+All endpoints are available at this URL as well as localhost.
+
 ---
 
 ## 🔐 Environment Variables
@@ -134,8 +147,15 @@ NODE_ENV=development
 ## 📚 API Documentation
 
 ### Base URL
+
+**Local:**
 ```
 http://localhost:5000
+```
+
+**Production (Vercel):**
+```
+https://ecommerce-backend-peach-six.vercel.app
 ```
 
 ### Response Format
@@ -200,6 +220,17 @@ Create a new user account.
 - `400` - Email already registered / Validation failed
 - `400` - Password must be at least 6 characters
 
+**Example:**
+```bash
+curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/signup \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "password123"
+  }'
+```
+
 ---
 
 ### 2. Login
@@ -239,6 +270,16 @@ Authenticate user and receive JWT token.
 **Error Responses:**
 - `401` - Invalid email or password
 - `400` - Validation failed
+
+**Example:**
+```bash
+curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "john@example.com",
+    "password": "password123"
+  }'
+```
 
 ---
 
@@ -313,6 +354,11 @@ Retrieve all available products with pagination details.
 
 **Error Responses:**
 - `500` - Internal server error
+
+**Example:**
+```bash
+curl -X GET https://ecommerce-backend-peach-six.vercel.app/products
+```
 
 ---
 
@@ -396,7 +442,9 @@ Authorization: Bearer <admin_token>
 **Error Responses:**
 - `401` - Missing authorization token / Unauthorized
 - `403` - Admin access required
-- `400` - Validation failed / Price must be > 0
+- `400` - Validation failed / Price
+
+must be > 0
 
 ---
 
@@ -537,6 +585,12 @@ Authorization: Bearer <token>
 **Error Responses:**
 - `401` - Missing authorization token / Unauthorized
 
+**Example:**
+```bash
+curl -X GET https://ecommerce-backend-peach-six.vercel.app/cart \
+  -H "Authorization: Bearer <token>"
+```
+
 ---
 
 ### 2. Add to Cart
@@ -585,6 +639,17 @@ Authorization: Bearer <token>
 - `400` - Validation failed / Quantity must be at least 1
 - `400` - Insufficient stock
 - `404` - Product not found
+
+**Example:**
+```bash
+curl -X POST https://ecommerce-backend-peach-six.vercel.app/cart/add \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <token>" \
+  -d '{
+    "productId": 1,
+    "quantity": 2
+  }'
+```
 
 ---
 
@@ -695,6 +760,12 @@ Authorization: Bearer <token>
 - `400` - Insufficient stock for [product name]
 - `404` - Product [id] not found
 
+**Example:**
+```bash
+curl -X POST https://ecommerce-backend-peach-six.vercel.app/orders \
+  -H "Authorization: Bearer <token>"
+```
+
 ---
 
 ### 2. Get User Orders
@@ -753,6 +824,12 @@ Authorization: Bearer <token>
 
 **Error Responses:**
 - `401` - Unauthorized
+
+**Example:**
+```bash
+curl -X GET https://ecommerce-backend-peach-six.vercel.app/orders \
+  -H "Authorization: Bearer <token>"
+```
 
 ---
 
@@ -900,11 +977,17 @@ The API uses a centralized error handling middleware that returns consistent err
 
 ---
 
-## 📝 Example Usage
+## 📝 Quick Start Guide
 
-### 1. Sign Up
+### 1. Access the API Documentation
+Visit the live deployment:
+```
+https://ecommerce-backend-peach-six.vercel.app/
+```
+
+### 2. Sign Up a New User
 ```bash
-curl -X POST http://localhost:5000/users/signup \
+curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/signup \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
@@ -913,9 +996,9 @@ curl -X POST http://localhost:5000/users/signup \
   }'
 ```
 
-### 2. Login
+### 3. Login and Get Token
 ```bash
-curl -X POST http://localhost:5000/users/login \
+curl -X POST https://ecommerce-backend-peach-six.vercel.app/users/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "john@example.com",
@@ -923,26 +1006,26 @@ curl -X POST http://localhost:5000/users/login \
   }'
 ```
 
-### 3. Get All Products
+### 4. View All Products
 ```bash
-curl -X GET http://localhost:5000/products
+curl -X GET https://ecommerce-backend-peach-six.vercel.app/products
 ```
 
-### 4. Add to Cart (with token)
+### 5. Add Product to Cart
 ```bash
-curl -X POST http://localhost:5000/cart/add \
+curl -X POST https://ecommerce-backend-peach-six.vercel.app/cart/add \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer <token>" \
+  -H "Authorization: Bearer <your_token_here>" \
   -d '{
     "productId": 1,
     "quantity": 2
   }'
 ```
 
-### 5. Place Order
+### 6. Place an Order
 ```bash
-curl -X POST http://localhost:5000/orders \
-  -H "Authorization: Bearer <token>"
+curl -X POST https://ecommerce-backend-peach-six.vercel.app/orders \
+  -H "Authorization: Bearer <your_token_here>"
 ```
 
 ---
@@ -977,16 +1060,82 @@ Centralized error handler for all API errors.
 
 ---
 
+## 🌍 Deployment
+
+The API is deployed on **Vercel** and is accessible globally at:
+
+```
+https://ecommerce-backend-peach-six.vercel.app
+```
+
+All endpoints work exactly the same way as on localhost. Just replace the base URL in your requests.
+
+---
+
 ## 🎯 Notes
 
 - All data is stored in-memory; data will be lost on server restart
-- Default admin account needs to be created manually by modifying user data
-- JWT secret in `.env` should be changed for production
+- For persistence in production, implement a database (MongoDB, PostgreSQL, etc.)
+- JWT secret in `.env` should be changed for production use
 - Add rate limiting for production use
-- Implement actual database for persistence
-- Add email verification for production
+- Implement email verification for production
 - Implement password reset functionality
 - Add more comprehensive logging
+
+---
+
+## 🔄 API Workflow Example
+
+**Complete workflow from signup to order placement:**
+
+```
+1. User Signs Up
+   POST /users/signup
+
+2. User Logs In
+   POST /users/login → Receives JWT Token
+
+3. User Views Products
+   GET /products
+
+4. User Selects a Product
+   GET /products/:id
+
+5. User Adds to Cart
+   POST /cart/add
+   (requires token)
+
+6. User Views Cart
+   GET /cart
+   (requires token)
+
+7. User Places Order
+   POST /orders
+   (requires token)
+
+8. User Views Orders
+   GET /orders
+   (requires token)
+```
+
+---
+
+## 🤝 Testing the API
+
+### Using Postman
+
+1. Import the API endpoints into Postman
+2. Set the base URL to `https://ecommerce-backend-peach-six.vercel.app`
+3. Create a login request and save the token
+4. Use the token in the Authorization header for protected routes
+
+### Using cURL
+
+All examples in this documentation use cURL. Replace `<token>` with your actual JWT token.
+
+### Using Thunder Client / Insomnia
+
+Same process as Postman - set base URL and use the token for protected routes.
 
 ---
 
@@ -999,3 +1148,17 @@ ISC
 ## 👨‍💻 Author
 
 Created as a production-grade backend starter template for e-commerce platforms.
+
+**Created:** February 13, 2026
+
+---
+
+## 📞 Support
+
+For issues or questions regarding the API:
+1. Check the documentation above
+2. Review error messages carefully
+3. Ensure correct request format
+4. Verify authorization headers for protected routes
+
+---
